@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="ORGANIZA · Seu dinheiro em uma tela">
+<meta property="og:description" content="Um minuto por dia para organizar seu dinheiro. Conheça a planilha ORGANIZA por R$ 19,90.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/img/video-capa.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<title>ORGANIZA · Seu dinheiro em uma tela</title>
+<meta name="description" content="Descubra para onde vai cada real com a ORGANIZA. Planilha financeira pronta por R$ 19,90, pagamento único e sem mensalidade.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap">
+<style>
+/* Layout: coluna única de 480px, seções alternando fundo neutro e branco, pensada para celular. Visual único (claro) de propósito. */
+:root {
+  color-scheme: light;
+  --background: oklch(96.6% .003 106.5);
+  --foreground: oklch(31.1% .006 235);
+  --card: oklch(100% 0 0);
+  --primary: oklch(85.8% .16 85);
+  --primary-foreground: oklch(17.8% 0 0);
+  --secondary: oklch(96.3% .047 90);
+  --secondary-foreground: oklch(47.7% .097 79);
+  --muted-foreground: oklch(51.1% .009 231);
+  --border: oklch(91.1% .006 107);
+  --highlight: oklch(67% .142 77);
+  --alert: oklch(53.5% .15 34);
+  --alert-background: oklch(93.2% .025 35);
+  --purchase-shadow: 0 10px 24px oklch(77.1% .155 82 / .4), inset 0 -3px 0 oklch(0% 0 0 / .12);
+  --surface-shadow: 0 8px 28px oklch(31.1% .006 235 / .06);
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-heading: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--background); color: var(--foreground); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+img, video { max-width: 100%; }
+button { font: inherit; border: 0; background: none; color: inherit; cursor: pointer; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--highlight); outline-offset: 2px; }
+
+.page-section { padding-block: 44px; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.section-inner { min-width: 0; max-width: 480px; margin: 0 auto; }
+.surface-section { background: var(--card); }
+.first-section { padding-top: 38px; padding-bottom: 32px; }
+
+h1 { font-family: var(--font-heading); text-transform: uppercase; font-size: 34px; font-weight: 800; line-height: 1.12; text-wrap: balance; }
+h1 span { color: var(--highlight); }
+h2 { font-family: var(--font-heading); font-size: 25px; font-weight: 800; line-height: 1.27; text-wrap: balance; }
+.hero-subtitle { color: var(--muted-foreground); margin: 18px 0 24px; font-size: 16px; line-height: 1.6; }
+
+/* Galeria da planilha */
+.spreadsheet-gallery { margin-bottom: 20px; }
+.spreadsheet-viewport { box-shadow: var(--surface-shadow); border-radius: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; display: flex; background: var(--card); }
+.spreadsheet-viewport::-webkit-scrollbar { display: none; }
+.spreadsheet-slide { aspect-ratio: 1920 / 1561; flex: 0 0 100%; min-width: 0; scroll-snap-align: start; }
+.spreadsheet-slide img { object-fit: contain; width: 100%; height: 100%; display: block; user-select: none; }
+.spreadsheet-navigation { color: var(--muted-foreground); display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
+.nav-arrow { width: 36px; height: 36px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; }
+.nav-arrow:hover { background: var(--secondary); color: var(--secondary-foreground); }
+.nav-arrow:disabled { opacity: .4; cursor: default; background: none; }
+.nav-arrow svg { width: 18px; height: 18px; }
+.spreadsheet-dots { display: flex; align-items: center; }
+.dot-button { width: 30px; height: 36px; display: inline-flex; align-items: center; justify-content: center; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); display: block; transition: background .2s, transform .2s; }
+.dot-button[aria-current="true"] .dot { background: var(--highlight); transform: scale(1.3); }
+
+/* Botão de compra */
+.purchase-button { background: var(--primary); color: var(--primary-foreground); box-shadow: var(--purchase-shadow); font-family: var(--font-heading); border-radius: 15px; font-weight: 800; text-decoration: none; display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; min-height: 60px; padding: 16px 17px; font-size: 12px; line-height: 1.5; text-align: left; transition: transform .16s, filter .16s; }
+.purchase-button svg { width: 18px; height: 18px; flex-shrink: 0; }
+.purchase-button:hover { filter: brightness(1.035); transform: translateY(-1px); }
+.purchase-button:active { transform: translateY(1px); }
+.microcopy { text-align: center; color: var(--muted-foreground); margin-top: 13px; font-size: 11px; line-height: 1.6; }
+
+.eyebrow { color: var(--muted-foreground); margin-bottom: 12px; font-size: 10px; font-weight: 700; line-height: 1.4; letter-spacing: .06em; }
+.alert-eyebrow { color: var(--alert); }
+
+/* Notícias */
+.news-badge { color: var(--alert); background: var(--alert-background); border-radius: 99px; display: inline-flex; align-items: center; gap: 7px; max-width: 100%; margin: 17px 0 20px; padding: 9px 11px; font-size: 10px; font-weight: 700; }
+.news-badge > span { background: var(--alert); border-radius: 50%; width: 6px; height: 6px; flex-shrink: 0; }
+.news-list { display: grid; gap: 14px; }
+.news-card { border: 1px solid var(--border); background: var(--card); border-radius: 16px; overflow: hidden; }
+.news-image { border-radius: 8px; width: calc(100% - 20px); height: auto; margin: 10px 10px 0; display: block; }
+.news-card figcaption { color: var(--muted-foreground); padding: 10px 13px 12px; font-size: 10px; }
+.news-conclusion { margin-top: 22px; font-size: 14px; line-height: 1.7; }
+.news-conclusion strong { font-weight: 700; }
+
+/* Vídeo */
+.demonstration-player { aspect-ratio: 16 / 9; max-width: 100%; background: var(--foreground); border-radius: 18px; margin-top: 22px; position: relative; overflow: hidden; }
+.demonstration-player video { object-fit: contain; width: 100%; height: 100%; display: block; }
+.demonstration-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.video-play { background: var(--primary); color: var(--primary-foreground); width: 60px; height: 60px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; box-shadow: var(--purchase-shadow); }
+.video-play svg { fill: currentColor; width: 23px; height: 23px; margin-left: 3px; }
+.demonstration-caption { text-align: center; font-family: var(--font-heading); margin-top: 13px; font-size: 13px; font-weight: 800; }
+
+/* Benefícios */
+.carousel-label { color: var(--muted-foreground); display: flex; justify-content: space-between; gap: 10px; margin: 24px 0 12px; font-size: 10px; }
+.carousel-label > span:last-child, .testimonial-hint { display: inline-flex; align-items: center; gap: 5px; }
+.carousel-label svg, .testimonial-hint svg { width: 12px; height: 12px; }
+.benefits-carousel { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-right: -20px; padding-right: 20px; }
+.benefits-carousel::-webkit-scrollbar { display: none; }
+.benefit-card { background: var(--card); scroll-snap-align: start; border-radius: 16px; flex: 0 0 160px; padding: 16px; }
+.benefit-icon { background: var(--secondary); color: var(--secondary-foreground); width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+.benefit-icon svg { stroke-width: 1.7px; width: 19px; height: 19px; }
+.benefit-card h3 { font-family: var(--font-heading); min-height: 36px; font-size: 12px; font-weight: 800; line-height: 1.5; }
+.benefit-card p { color: var(--muted-foreground); margin-top: 5px; font-size: 12px; line-height: 1.5; }
+
+/* Depoimentos */
+.testimonial-gallery { display: flex; gap: 12px; margin-top: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.testimonial-gallery::-webkit-scrollbar { display: none; }
+.testimonial-card { background: var(--card); border: 1px solid var(--border); scroll-snap-align: center; border-radius: 16px; flex: 0 0 min(320px, 76%); overflow: hidden; }
+.testimonial-card img { width: 100%; height: auto; display: block; }
+.testimonial-hint { color: var(--muted-foreground); justify-content: flex-end; width: 100%; margin-top: 10px; font-size: 10px; }
+
+/* Oferta */
+.offer-section { padding-top: 48px; scroll-margin-top: 20px; }
+.offer-section h2 { text-align: center; max-width: 420px; margin: 0 auto 16px; }
+.offer-description { text-align: center; color: var(--muted-foreground); max-width: 420px; margin: 0 auto 28px; font-size: 14px; line-height: 1.65; }
+.offer-card { background: var(--card); border: 2px solid var(--primary); box-shadow: var(--surface-shadow); text-align: center; border-radius: 22px; padding: 24px 20px 21px; }
+.offer-badge { background: var(--secondary); color: var(--secondary-foreground); font-size: 9px; font-weight: 800; font-family: var(--font-heading); border-radius: 99px; padding: 7px 11px; display: inline-block; letter-spacing: .04em; }
+.offer-card ul { text-align: left; margin: 23px 0 21px; list-style: none; display: grid; gap: 8px; }
+.offer-card li { display: flex; align-items: center; gap: 10px; font-size: 13px; line-height: 1.65; }
+.offer-card li svg { color: var(--secondary-foreground); flex-shrink: 0; width: 17px; height: 17px; }
+.price-block { border-top: 1px solid var(--border); margin-bottom: 23px; padding-top: 21px; }
+.price-block p { color: var(--muted-foreground); font-size: 12px; line-height: 1.6; }
+.price { font-family: var(--font-heading); white-space: nowrap; margin: 2px 0; font-size: 56px; font-weight: 800; line-height: 1.3; font-variant-numeric: tabular-nums; }
+.offer-card .purchase-button { min-height: 64px; font-size: 13px; }
+
+/* FAQ */
+.faq-section { padding-top: 16px; padding-bottom: 42px; }
+.faq-list { display: grid; gap: 10px; margin: 22px 0 27px; }
+.faq-item { background: var(--card); border-radius: 14px; overflow: hidden; }
+.faq-trigger { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 17px 16px; text-align: left; font-family: var(--font-heading); font-size: 12px; font-weight: 800; line-height: 1.5; color: var(--foreground); }
+.faq-symbol { background: var(--background); border-radius: 50%; width: 25px; height: 25px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; transition: background .2s; }
+.faq-symbol svg { width: 15px; height: 15px; transition: transform .2s; }
+.is-open .faq-symbol { background: var(--primary); color: var(--primary-foreground); }
+.is-open .faq-symbol svg { transform: rotate(45deg); }
+.faq-answer { color: var(--muted-foreground); padding: 0 16px 18px; font-size: 13px; line-height: 1.6; }
+
+/* Rodapé */
+.page-footer { border-top: 1px solid var(--border); text-align: center; color: var(--muted-foreground); padding-block: 25px 30px; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); font-size: 11px; line-height: 1.8; }
+.page-footer a { color: var(--foreground); font-weight: 600; text-decoration: none; }
+.page-footer a:hover { text-decoration: underline; }
+.support-line { display: flex; flex-wrap: wrap; justify-content: center; column-gap: 8px; }
+.support-line .email { user-select: all; color: var(--foreground); font-weight: 600; }
+
+@media (min-width: 600px) {
+  .page-section { padding-block: 48px; }
+  .first-section { padding-top: 50px; padding-bottom: 36px; }
+  .faq-section { padding-top: 16px; }
+  .purchase-button { font-size: 13px; }
+}
+@media (max-width: 359px) {
+  .purchase-button { padding-left: 12px; padding-right: 12px; font-size: 10px; }
+  .price { font-size: 48px; }
+  .offer-card { padding-left: 14px; padding-right: 14px; }
+  .offer-card .purchase-button { font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+
+<main class="sales-page">
+  <section class="page-section first-section" aria-label="ORGANIZA, planilha financeira">
+    <div class="section-inner">
+      <h1>Descubra para onde vai o seu <span>salário</span> e faça ele sobrar!</h1>
+      <p class="hero-subtitle">Você só anota, a planilha faz todo o resto!</p>
+
+      <div class="spreadsheet-gallery" role="region" aria-label="Imagens da planilha ORGANIZA" aria-roledescription="carrossel">
+        <div class="spreadsheet-viewport" id="sheetViewport">
+          <div class="spreadsheet-slide" aria-label="1 de 4: Início"><img src="img/tela-1.webp" alt="ORGANIZA: tela de início" width="1920" height="1561" draggable="false"></div>
+          <div class="spreadsheet-slide" aria-label="2 de 4: Painel financeiro"><img src="img/tela-2.webp" alt="ORGANIZA: painel financeiro" width="1920" height="1561" loading="lazy" draggable="false"></div>
+          <div class="spreadsheet-slide" aria-label="3 de 4: Metas"><img src="img/tela-3.webp" alt="ORGANIZA: metas" width="1920" height="1561" loading="lazy" draggable="false"></div>
+          <div class="spreadsheet-slide" aria-label="4 de 4: Lançamentos"><img src="img/tela-4.webp" alt="ORGANIZA: lançamentos" width="1920" height="1561" loading="lazy" draggable="false"></div>
+        </div>
+        <div class="spreadsheet-navigation">
+          <button class="nav-arrow" id="sheetPrev" aria-label="Imagem anterior da planilha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+          <div class="spreadsheet-dots" id="sheetDots">
+            <button class="dot-button" aria-label="Ver Início" aria-current="true"><span class="dot"></span></button>
+            <button class="dot-button" aria-label="Ver Painel financeiro"><span class="dot"></span></button>
+            <button class="dot-button" aria-label="Ver Metas"><span class="dot"></span></button>
+            <button class="dot-button" aria-label="Ver Lançamentos"><span class="dot"></span></button>
+          </div>
+          <button class="nav-arrow" id="sheetNext" aria-label="Próxima imagem da planilha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+        </div>
+      </div>
+
+      <a href="#oferta" class="purchase-button">QUERO TER MINHA VIRADA DE CHAVE<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></a>
+      <p class="microcopy">Acesso imediato · Celular e PC · Sem mensalidade</p>
+    </div>
+  </section>
+
+  <section class="page-section surface-section">
+    <div class="section-inner">
+      <p class="eyebrow alert-eyebrow">ISSO ESTÁ NAS NOTÍCIAS</p>
+      <h2>Você não está sozinho.</h2>
+      <div class="news-badge"><span aria-hidden="true"></span>84,2 milhões de brasileiros no vermelho</div>
+      <div class="news-list">
+        <figure class="news-card">
+          <img class="news-image" src="img/noticia-cnn.webp" alt="CNN Brasil: Inadimplência atinge recorde de 84,2 milhões de pessoas, aponta Serasa" width="901" height="653" loading="lazy" decoding="async">
+          <figcaption>CNN Brasil, 03/11/2026</figcaption>
+        </figure>
+        <figure class="news-card">
+          <img class="news-image" src="img/noticia-usp.webp" alt="Jornal da USP: Falta de planejamento financeiro é o principal motivo de endividamento das novas gerações" width="986" height="851" loading="lazy" decoding="async">
+          <figcaption>Jornal da USP</figcaption>
+        </figure>
+      </div>
+      <p class="news-conclusion">Não é falta de salário, é falta de enxergar o dinheiro.<br><strong>A ORGANIZA mostra tudo em uma tela.</strong></p>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="section-inner">
+      <p class="eyebrow">O QUE TEM DENTRO</p>
+      <h2>Tudo pronto! Você só anota.</h2>
+      <div class="demonstration-player">
+        <video id="demoVideo" src="img/organiza-como-funciona.mp4" poster="img/video-capa.jpg" playsinline preload="none" aria-label="Vídeo demonstrativo da ORGANIZA"></video>
+        <div class="demonstration-overlay" id="demoOverlay">
+          <button class="video-play" id="demoPlay" aria-label="Reproduzir vídeo demonstrativo"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></button>
+        </div>
+      </div>
+      <p class="demonstration-caption">Veja a ORGANIZA por dentro</p>
+
+      <div class="carousel-label"><span>Benefícios</span><span>arraste para o lado <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+      <div class="benefits-carousel" tabindex="0" aria-label="Benefícios da ORGANIZA">
+        <article class="benefit-card"><div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg></div><h3>Painel automático</h3><p>Entrou, saiu e sobrou, com gráficos.</p></article>
+        <article class="benefit-card"><div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></div><h3>Lançamento em 1 min</h3><p>Anota em um lugar, ela calcula o resto.</p></article>
+        <article class="benefit-card"><div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 16H8"/><path d="M14 8H8"/><path d="M16 12H8"/><path d="M4 3a1 1 0 0 1 1-1 1.3 1.3 0 0 1 .7.2l.933.6a1.3 1.3 0 0 0 1.4 0l.934-.6a1.3 1.3 0 0 1 1.4 0l.933.6a1.3 1.3 0 0 0 1.4 0l.933-.6a1.3 1.3 0 0 1 1.4 0l.934.6a1.3 1.3 0 0 0 1.4 0l.933-.6A1.3 1.3 0 0 1 19 2a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1 1.3 1.3 0 0 1-.7-.2l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.934.6a1.3 1.3 0 0 1-1.4 0l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-1.4 0l-.934-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-.7.2 1 1 0 0 1-1-1z"/></svg></div><h3>Contas fixas</h3><p>O que já pagou e o que vai vencer.</p></article>
+        <article class="benefit-card"><div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><h3>Metas e reserva</h3><p>Quanto guardar por mês para chegar lá.</p></article>
+        <article class="benefit-card"><div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16v5"/><path d="M16 14v7"/><path d="M20 10v11"/><path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15"/><path d="M4 18v3"/><path d="M8 14v7"/></svg></div><h3>Visão do ano</h3><p>12 meses lado a lado.</p></article>
+        <article class="benefit-card"><div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"/><path d="M20 11v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"/><path d="M7.5 7a1 1 0 0 1 0-5A4.8 8 0 0 1 12 7a4.8 8 0 0 1 4.5-5 1 1 0 0 1 0 5"/><rect x="3" y="7" width="18" height="4" rx="1"/></svg></div><h3>Bônus</h3><p>Vídeo de uso e 5 temas de cor.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section surface-section">
+    <div class="section-inner">
+      <h2>Quem usa, indica!</h2>
+      <div class="testimonial-gallery" role="region" aria-label="Mensagens de quem usa a ORGANIZA" tabindex="0">
+        <figure class="testimonial-card"><img src="img/depoimento-1.webp" alt="Mensagem de cliente: a Organiza mudou minha vida financeira, comecei a guardar dinheiro e consegui dar entrada no meu apartamento" width="1122" height="1402" loading="lazy" decoding="async"></figure>
+        <figure class="testimonial-card"><img src="img/depoimento-2.webp" alt="Mensagem de cliente: passei a enxergar para onde meu dinheiro ia, cortei excessos e ganhei tranquilidade" width="1086" height="1448" loading="lazy" decoding="async"></figure>
+      </div>
+      <p class="testimonial-hint"><span>arraste para o lado</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></p>
+    </div>
+  </section>
+
+  <section id="oferta" class="page-section offer-section">
+    <div class="section-inner">
+      <h2>VOCÊ MERECE TRANQUILIDADE FINANCEIRA!</h2>
+      <p class="offer-description">Tudo em uma única planilha, simples e prática.</p>
+      <div class="offer-card">
+        <span class="offer-badge">PREÇO DE LANÇAMENTO · 60% OFF</span>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Planilha completa</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Vídeo explicando o uso</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>5 temas de cor</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Sem mensalidade, é sua para sempre</li>
+        </ul>
+        <div class="price-block">
+          <p>de <s>R$&nbsp;49,90</s> por apenas</p>
+          <div class="price">R$&nbsp;19,90</div>
+          <p>pagamento único</p>
+        </div>
+        <a class="purchase-button checkout-link" href="https://pay.hotmart.com/F107840594D?checkoutMode=10" target="_blank" rel="noopener">QUERO A ORGANIZA AGORA<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <p class="microcopy">Compra 100% segura · Acesso imediato no e-mail</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section faq-section">
+    <div class="section-inner">
+      <p class="eyebrow">DÚVIDAS</p>
+      <h2>Perguntas frequentes</h2>
+      <div class="faq-list" id="faqList">
+        <div class="faq-item is-open">
+          <button class="faq-trigger" aria-expanded="true" aria-controls="answer-0" id="question-0"><span>Como recebo a planilha?</span><span class="faq-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button>
+          <div id="answer-0" role="region" aria-labelledby="question-0"><p class="faq-answer">Logo após a compra o link chega no seu e-mail. É só fazer uma cópia e começar.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false" aria-controls="answer-1" id="question-1"><span>Preciso pagar algum programa?</span><span class="faq-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button>
+          <div id="answer-1" role="region" aria-labelledby="question-1" hidden><p class="faq-answer">Não. Funciona no Google Planilhas, que é gratuito. Basta ter uma conta Google.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false" aria-controls="answer-2" id="question-2"><span>Funciona no celular?</span><span class="faq-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button>
+          <div id="answer-2" role="region" aria-labelledby="question-2" hidden><p class="faq-answer">Sim. Você anota pelo app do Google Planilhas e vê o painel completo no computador.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false" aria-controls="answer-3" id="question-3"><span>Não entendo de fórmula. Consigo usar?</span><span class="faq-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button>
+          <div id="answer-3" role="region" aria-labelledby="question-3" hidden><p class="faq-answer">Consegue. As fórmulas já estão prontas. Você só anota quanto entrou e quanto saiu.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false" aria-controls="answer-4" id="question-4"><span>Tem mensalidade?</span><span class="faq-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button>
+          <div id="answer-4" role="region" aria-labelledby="question-4" hidden><p class="faq-answer">Não. Você paga uma vez e a planilha é sua.</p></div>
+        </div>
+      </div>
+      <a class="purchase-button checkout-link" href="https://pay.hotmart.com/F107840594D?checkoutMode=10" target="_blank" rel="noopener">COMEÇAR HOJE POR R$ 19,90<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+    </div>
+  </section>
+
+  <footer class="page-footer">
+    <p>ORGANIZA · Planilha Financeira</p>
+    <p class="support-line"><span>Suporte:</span><a href="https://wa.me/5519989096571" target="_blank" rel="noopener">WhatsApp (19) 98909-6571</a><span aria-hidden="true">·</span><span class="email">digitalfarqui@gmail.com</span></p>
+  </footer>
+</main>
+
+<script>
+(function () {
+  // Galeria da planilha
+  var vp = document.getElementById('sheetViewport');
+  var dots = Array.prototype.slice.call(document.querySelectorAll('#sheetDots .dot-button'));
+  var prev = document.getElementById('sheetPrev');
+  var next = document.getElementById('sheetNext');
+  var total = dots.length;
+  function current() { return Math.round(vp.scrollLeft / vp.clientWidth); }
+  function go(i) { i = Math.max(0, Math.min(total - 1, i)); vp.scrollTo({ left: i * vp.clientWidth, behavior: 'smooth' }); }
+  function sync() {
+    var i = current();
+    dots.forEach(function (d, k) { if (k === i) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current'); });
+    prev.disabled = i === 0; next.disabled = i === total - 1;
+  }
+  dots.forEach(function (d, k) { d.addEventListener('click', function () { go(k); }); });
+  prev.addEventListener('click', function () { go(current() - 1); });
+  next.addEventListener('click', function () { go(current() + 1); });
+  var t; vp.addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(sync, 60); }, { passive: true });
+  sync();
+
+  // Vídeo
+  var video = document.getElementById('demoVideo');
+  var overlay = document.getElementById('demoOverlay');
+  document.getElementById('demoPlay').addEventListener('click', function () {
+    overlay.hidden = true; video.controls = true;
+    var p = video.play(); if (p && p.catch) p.catch(function () {});
+  });
+  video.addEventListener('ended', function () { overlay.hidden = false; video.controls = false; });
+
+  // FAQ
+  document.querySelectorAll('.faq-item').forEach(function (item) {
+    var btn = item.querySelector('.faq-trigger');
+    var panel = document.getElementById(btn.getAttribute('aria-controls'));
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      panel.hidden = open;
+      item.classList.toggle('is-open', !open);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
