@@ -55,7 +55,7 @@ h2 { font-family: var(--font-heading); font-size: 25px; font-weight: 800; line-h
 .spreadsheet-gallery { margin-bottom: 20px; }
 .spreadsheet-viewport { box-shadow: var(--surface-shadow); border-radius: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; display: flex; background: var(--card); }
 .spreadsheet-viewport::-webkit-scrollbar { display: none; }
-.spreadsheet-slide { aspect-ratio: 1920 / 1561; flex: 0 0 100%; min-width: 0; scroll-snap-align: start; }
+.spreadsheet-slide { aspect-ratio: 1212 / 704; flex: 0 0 100%; min-width: 0; scroll-snap-align: start; }
 .spreadsheet-slide img { object-fit: contain; width: 100%; height: 100%; display: block; user-select: none; }
 .spreadsheet-navigation { color: var(--muted-foreground); display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
 .nav-arrow { width: 36px; height: 36px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; }
@@ -173,10 +173,10 @@ h2 { font-family: var(--font-heading); font-size: 25px; font-weight: 800; line-h
 
       <div class="spreadsheet-gallery" role="region" aria-label="Imagens da planilha ORGANIZA" aria-roledescription="carrossel">
         <div class="spreadsheet-viewport" id="sheetViewport">
-          <div class="spreadsheet-slide" aria-label="1 de 4: Início"><img src="img/tela-1.webp" alt="ORGANIZA: tela de início" width="1920" height="1561" draggable="false"></div>
-          <div class="spreadsheet-slide" aria-label="2 de 4: Painel financeiro"><img src="img/tela-2.webp" alt="ORGANIZA: painel financeiro" width="1920" height="1561" loading="lazy" draggable="false"></div>
-          <div class="spreadsheet-slide" aria-label="3 de 4: Metas"><img src="img/tela-3.webp" alt="ORGANIZA: metas" width="1920" height="1561" loading="lazy" draggable="false"></div>
-          <div class="spreadsheet-slide" aria-label="4 de 4: Lançamentos"><img src="img/tela-4.webp" alt="ORGANIZA: lançamentos" width="1920" height="1561" loading="lazy" draggable="false"></div>
+          <div class="spreadsheet-slide" aria-label="1 de 4: Início"><img src="img/tela-1.webp?v=2" alt="ORGANIZA: tela de início" width="1212" height="704" draggable="false"></div>
+          <div class="spreadsheet-slide" aria-label="2 de 4: Painel financeiro"><img src="img/tela-2.webp?v=2" alt="ORGANIZA: painel financeiro" width="1212" height="704" loading="lazy" draggable="false"></div>
+          <div class="spreadsheet-slide" aria-label="3 de 4: Metas"><img src="img/tela-3.webp?v=2" alt="ORGANIZA: metas" width="1212" height="704" loading="lazy" draggable="false"></div>
+          <div class="spreadsheet-slide" aria-label="4 de 4: Lançamentos"><img src="img/tela-4.webp?v=2" alt="ORGANIZA: lançamentos" width="1212" height="704" loading="lazy" draggable="false"></div>
         </div>
         <div class="spreadsheet-navigation">
           <button class="nav-arrow" id="sheetPrev" aria-label="Imagem anterior da planilha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
